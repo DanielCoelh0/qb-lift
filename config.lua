@@ -11,7 +11,7 @@ Config.Elevators = {
     -- Sound = "soundname" -> Use custom sound when player reaches the new floor | You can add your custom sound with .ogg extension in interactSound folder /client/html/sounds
     -- Simple example with restricted floors and custom sound
     ["restricted"] = {
-        Job = "ambulance",                                                             -- Leave blank if you don't want to use Player Job
+        Job = "police",                                                             -- Leave blank if you don't want to use Player Job
         Sound = "liftSoundBellRing",                                                -- Leave blank if you don't want to use Custom Sound
         Name = "With Sound & Last Floor Restricted",
         Floors = {
