@@ -118,13 +118,11 @@ CreateThread(function()
     end
 end)
 
-
-
 RegisterNetEvent('qb-lift:checkFloorPermission')
 AddEventHandler('qb-lift:checkFloorPermission', function(data)
     if Config.Elevators[data.lift].Job then
         if data.floor.Restricted then
-            if Config.Elevators[data.lift].Job == PlayerJob.name then
+            if IsAuthorized(PlayerJob.name, data.lift) then
                 changeFloor(data)
             else
                 QBCore.Functions.Notify(Config.Language[Config.UseLanguage].Restricted, "error")
@@ -136,3 +134,13 @@ AddEventHandler('qb-lift:checkFloorPermission', function(data)
         changeFloor(data)
     end
 end)
+
+--helper function
+function IsAuthorized(job, lift)
+    for a=1, #Config.Elevators[lift].Job do
+        if job == Config.Elevators[lift].Job[a] then
+            return true
+        end
+    end
+    return false
+end
