@@ -9,7 +9,7 @@ qb-lift is a script that allows you to create multiple elevators with multiple f
 
 # Features
 * Create multiple elevators with multiple floors
-* Create restricted floors with one or multiple jobs
+* Create restricted floors with one or multiple jobs or gangs
 * Use your custom sounds in your lifts (Need interact-sound)
 
 # Preview
