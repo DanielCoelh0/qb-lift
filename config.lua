@@ -7,11 +7,11 @@ Config.UseSoundEffect = true                                                    
 
 Config.Elevators = {
     -- The following tags are not required! You can add them if you want
-    -- Job = "jobname" -> Only player with this job can can go to the restricted floors
+    -- Group = "jobname" or "gangname" -> Only player with this job or gang can can go to the restricted floors
     -- Sound = "soundname" -> Use custom sound when player reaches the new floor | You can add your custom sound with .ogg extension in interactSound folder /client/html/sounds
     -- Simple example with restricted floors and custom sound
     ["restricted"] = {
-        Job = {"police", "ambulance", "mechanic"},                                  -- Leave blank if you don't want to use Player Job
+        Group = {"police", "ambulance", "lostmc"},                                -- Leave blank if you don't want to use Player Job - You can add jobs or gangs groups
         Sound = "liftSoundBellRing",                                                -- Leave blank if you don't want to use Custom Sound
         Name = "With Sound & Last Floor Restricted",
         Floors = {

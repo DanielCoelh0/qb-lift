@@ -2,21 +2,26 @@
 
 local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = {}
-local PlayerJob = {}
+local PlayerJob, PlayerGang = {}
 local floorsMenu = {}
 
 AddEventHandler('onResourceStart', function(resource)
     PlayerData = QBCore.Functions.GetPlayerData()
     PlayerJob = PlayerData.job
+    PlayerGang = PlayerData.gang
 end)
 
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     PlayerJob = PlayerData.job
+    PlayerGang = PlayerData.gang
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
     PlayerJob = job
+end)
+RegisterNetEvent('QBCore:Client:OnGangUpdate', function(gang)
+    PlayerGang = gang
 end)
 
 local DrawText3Ds = function(x, y, z, text)
@@ -120,9 +125,9 @@ end)
 
 RegisterNetEvent('qb-lift:checkFloorPermission')
 AddEventHandler('qb-lift:checkFloorPermission', function(data)
-    if Config.Elevators[data.lift].Job then
+    if Config.Elevators[data.lift].Group then
         if data.floor.Restricted then
-            if IsAuthorized(PlayerJob.name, data.lift) then
+            if IsAuthorized(data.lift) then
                 changeFloor(data)
             else
                 QBCore.Functions.Notify(Config.Language[Config.UseLanguage].Restricted, "error")
@@ -136,9 +141,9 @@ AddEventHandler('qb-lift:checkFloorPermission', function(data)
 end)
 
 --helper function
-function IsAuthorized(job, lift)
-    for a=1, #Config.Elevators[lift].Job do
-        if job == Config.Elevators[lift].Job[a] then
+function IsAuthorized(lift)
+    for a=1, #Config.Elevators[lift].Group do
+        if PlayerJob.name == Config.Elevators[lift].Group[a] or PlayerGang.name == Config.Elevators[lift].Group[a] then
             return true
         end
     end
